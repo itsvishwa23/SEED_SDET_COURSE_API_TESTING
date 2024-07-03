@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "2fd9f41a-3bc7-4cf8-b759-6e83eaf834d2",
+		"name": "DAY_5_API_CHAINING",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36642271"
+	},
+	"item": [
+		{
+			"name": "API_TEST_02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response body as JSON\r",
+							"var responseData = pm.response.json();\r",
+							"\r",
+							"// Extract the ID from the response object directly\r",
+							"var id = responseData.id;\r",
+							"\r",
+							"// Print the ID to the Postman console\r",
+							"console.log(\"ID:\", id);\r",
+							"\r",
+							"// Set the ID as an environment variable\r",
+							"pm.globals.set(\"id\", id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:go-rest-api-bearer-token:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Gandharv Bharadwaj PhD\",\r\n  \"email\": \"bharadwaj_phd_gadndharv@swift.test\",\r\n  \"gender\": \"male\",\r\n  \"status\": \"active\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/public/v2/users",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TEST_01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// Expected data\r",
+							"const expectedData = {\r",
+							"    \"id\": 7010560,\r",
+							"    \"name\": \"Gandharv Bharadwaj PhD\",\r",
+							"    \"email\": \"bharadwaj_phd_gadndharv@swift.test\",\r",
+							"    \"gender\": \"male\",\r",
+							"    \"status\": \"active\"\r",
+							"};\r",
+							"\r",
+							"// Get the response body\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"// Check if the response matches the expected data\r",
+							"pm.test(\"Response matches expected data\", function () {\r",
+							"    pm.expect(response).to.eql(expectedData);\r",
+							"});\r",
+							"\r",
+							"// Parse the response body as JSON\r",
+							"const responseData = pm.response.json();\r",
+							"\r",
+							"// Extract the 'id' from the response data\r",
+							"const id = responseData.id;\r",
+							"\r",
+							"// Print the 'id' to the Postman console\r",
+							"console.log('Extracted ID:', id);\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{vault:go-rest-api-bearer-token:token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users/7010560",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"7010560"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TEST_04",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ceb5bac58f5839b458ec72977532c4b043e97f526ce01f84da7865212a512ae2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in//public/v2/users/{{id}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"",
+						"public",
+						"v2",
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "ceb5bac58f5839b458ec72977532c4b043e97f526ce01f84da7865212a512ae2",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
