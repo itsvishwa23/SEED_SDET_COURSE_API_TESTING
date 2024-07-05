@@ -15,7 +15,10 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"\r",
+							"pm.globals.unset(\"URL\");"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -25,7 +28,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"pm.globals.get(\"URL\");"
+							"pm.globals.set(\"URL\", \"https://reqres.in/api/\");"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -36,15 +39,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reqres.in/api/users?page=2",
-					"protocol": "https",
+					"raw": "{{URL}}users?page=2",
 					"host": [
-						"reqres",
-						"in"
-					],
-					"path": [
-						"api",
-						"users"
+						"{{URL}}users"
 					],
 					"query": [
 						{

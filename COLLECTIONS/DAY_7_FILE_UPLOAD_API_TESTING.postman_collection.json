@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "4c12c4fc-2a1d-4926-8c1d-a6724dd43f46",
+		"name": "DAY_7_FILE_UPLOAD_API_TESTING",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36642271"
+	},
+	"item": [
+		{
+			"name": "UPLOAD_FILE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"// Extract the filename from the response\r",
+							"var response = pm.response.json();\r",
+							"var fileName = response.filename;\r",
+							"\r",
+							"// Set the filename as a collection variable\r",
+							"pm.collectionVariables.set(\"fileName\", fileName);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/Downloads/Screenshot 2024-07-04 at 16-55-55 Ads Manager - Manage ads - Campaigns.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.escuelajs.co/api/v1/files/upload",
+					"protocol": "https",
+					"host": [
+						"api",
+						"escuelajs",
+						"co"
+					],
+					"path": [
+						"api",
+						"v1",
+						"files",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SHOW_FILE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.escuelajs.co/api/v1/files/{{fileName}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"escuelajs",
+						"co"
+					],
+					"path": [
+						"api",
+						"v1",
+						"files",
+						"{{fileName}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "fileName",
+			"value": ""
+		}
+	]
+}
